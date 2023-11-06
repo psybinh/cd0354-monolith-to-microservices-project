@@ -45,7 +45,7 @@ jobs:
             docker push psybinh/udagram-api-feed:v3
             docker push psybinh/udagram-api-user:v3
             docker push psybinh/udagram-frontend:v3
-            docker push psybinh/udagram-reverseproxy:v3
+            docker push psybinh/reverseproxy:v3
 
 workflows:
   default:
