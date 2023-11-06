@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- labels:
-   app: udagram-api-user
- name: udagram-api-user
+  name: udagram-api-user
+  labels:
+    app: udagram-api-user
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: udagram-api-user
@@ -15,63 +15,14 @@ spec:
         app: udagram-api-user
     spec:
       containers:
-      - image: psybinh/udagram-api-user
-        name: udagram-api-user
-        imagePullPolicy: Always
-        resources:
-          requests:
-            memory: "2Gi"
-            cpu: "250m"
-          limits:
-            memory: "4Gi"
-            cpu: "500m"
-        env:
-        - name: POSTGRES_DB
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: POSTGRES_DB
-        - name: POSTGRES_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: POSTGRES_HOST
-        - name: AWS_BUCKET
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: AWS_BUCKET
-        - name: AWS_PROFILE
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: AWS_PROFILE
-        - name: AWS_REGION
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: AWS_REGION
-        - name: JWT_SECRET
-          valueFrom:
-            configMapKeyRef:
-              name: env-config
-              key: JWT_SECRET
-        - name: POSTGRES_USERNAME
-          valueFrom:
-            secretKeyRef:
+      - name: udagram-api-user
+        image: psybinh/udagram-api-user
+        envFrom:
+          - secretRef:
               name: env-secret
-              key: POSTGRES_USERNAME
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: env-secret
-              key: POSTGRES_PASSWORD
-        volumeMounts:
-        - name: secret-volume
-          mountPath: "/root/.aws/"
-          readOnly: true
-      restartPolicy: Always
-      volumes:
-      - name: secret-volume
-        secret:
-          secretName: aws-secret
+          - configMapRef:
+              name: env-config
+          - secretRef:
+              name: aws-secret
+        ports:
+        - containerPort: 80
