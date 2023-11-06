@@ -31,8 +31,8 @@ jobs:
             docker build -t udagram-frontend ./udagram-frontend
             docker tag udagram-frontend psybinh/udagram-frontend:v3
 
-            docker build -t udagram-reverseproxy ./udagram-reverseproxy
-            docker tag udagram-reverseproxy psybinh/udagram-reverseproxy:v3
+            docker build -t reverseproxy ./udagram-reverseproxy
+            docker tag reverseproxy psybinh/reverseproxy:v3
 
             echo "-------- All images succesfully built----------"
 
