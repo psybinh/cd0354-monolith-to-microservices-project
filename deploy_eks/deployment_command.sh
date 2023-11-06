@@ -1,3 +1,4 @@
+# deploy
 kubectl apply -f aws-secret.yaml
 kubectl apply -f env-secret.yaml
 kubectl apply -f env-configmap.yaml
@@ -11,3 +12,11 @@ kubectl apply -f udagram-api-user-service.yaml
 kubectl apply -f udagram-api-feed-service.yaml
 kubectl apply -f udagram-frontend-service.yaml
 kubectl apply -f reverseproxy-service.yaml
+
+kubectl expose deployment udagram-frontend --type=LoadBalancer --name=publicfrontend
+kubectl expose deployment reverseproxy --type=LoadBalancer --name=publicreverseproxy
+
+
+# delete
+kubectl delete deployments reverseproxy udagram-api-feed udagram-api-user udagram-frontend
+kubectl delete services publicfrontend publicreverseproxy
