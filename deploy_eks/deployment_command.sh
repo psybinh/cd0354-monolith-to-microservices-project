@@ -16,6 +16,15 @@ kubectl apply -f reverseproxy-service.yaml
 kubectl expose deployment udagram-frontend --type=LoadBalancer --name=publicfrontend
 kubectl expose deployment reverseproxy --type=LoadBalancer --name=publicreverseproxy
 
+kubectl get services
+
+# copy link
+kubectl set image deployment udagram-frontend udagram-frontend=psybinh/udagram-frontend
+
+# git push
+git add .
+git commit -m "dsafsdfsdf"
+git push origin circleci
 
 # delete
 kubectl delete deployments reverseproxy udagram-api-feed udagram-api-user udagram-frontend
