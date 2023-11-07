@@ -31,8 +31,8 @@ jobs:
             docker build -t udagram-frontend ./udagram-frontend
             docker tag udagram-frontend psybinh/udagram-frontend
 
-            docker build -t reverseproxy ./udagram-reverseproxy
-            docker tag reverseproxy psybinh/reverseproxy
+            docker build -t udagram-reverseproxy ./udagram-reverseproxy
+            docker tag udagram-reverseproxy psybinh/udagram-reverseproxy
 
             echo "-------- All images succesfully built----------"
 
@@ -45,7 +45,7 @@ jobs:
             docker push psybinh/udagram-api-feed
             docker push psybinh/udagram-api-user
             docker push psybinh/udagram-frontend
-            docker push psybinh/reverseproxy
+            docker push psybinh/udagram-reverseproxy
 
 workflows:
   default:
