@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagram-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: udagram-frontend
+  template:
+    metadata:
+      labels:
+        run: udagram-frontend
+    spec:
+      containers:
+      - name: udagram-frontend
+        image: psybinh/udagram-frontend
+        ports: 
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: 500m
+          requests:
+            memory: "1Gi"
+            cpu: 200m
